@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ProjectsDirectory>$(MSBuildProjectDirectory)\..\..\</ProjectsDirectory>
+    </PropertyGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release' AND '$(TargetFramework)' == 'netstandard2.1'">
+        <Exec Command="copy &quot;$(OutDir)/Core.dll&quot; &quot;$(ProjectsDirectory)cg-server\Core.dll&quot; /y &amp; echo &quot;Copy successful!&quot;" />
+        <Exec Command="copy &quot;$(OutDir)/Core.dll&quot; &quot;$(ProjectsDirectory)cg-client\Assets\Plugins\Core.dll&quot; /y &amp; echo &quot;Copy successful!&quot;" />
+    </Target>
+
+</Project>
